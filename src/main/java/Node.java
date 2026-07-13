@@ -1,31 +1,31 @@
 public class Node<K extends Comparable<K>, V> {
 
-    private int key;
-    private int value;
+    private K key;
+    private V value;
     private Color color;
     private Node<K, V> parent;
     private Node<K, V> left;
     private Node<K, V> right;
 
-    public Node(int key, int value) {
+    public Node(K key, V value) {
         this.key = key;
         this.value = value;
         this.color = Color.RED;
     }
 
-    public int getKey() {
+    public K getKey() {
         return key;
     }
 
-    public void setKey(int key) {
+    public void setKey(K key) {
         this.key = key;
     }
 
-    public int getValue() {
+    public V getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(V value) {
         this.value = value;
     }
 

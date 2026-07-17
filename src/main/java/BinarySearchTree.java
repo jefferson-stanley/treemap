@@ -42,7 +42,7 @@ public abstract class BinarySearchTree<K extends Comparable<K>, V> {
             }
         }
 
-        return null;
+        return TNULL;
     }
 
     public abstract void insert(K key, V value);

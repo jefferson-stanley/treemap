@@ -13,10 +13,12 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         Node<K, V> parent = TNULL;
 
         while (aux != TNULL) {
-            if (key.compareTo(aux.getKey()) == -1) {
+            parent = aux;
+
+            if (key.compareTo(aux.getKey()) < 0) {
                 aux = aux.getLeft();
 
-            } else if (key.compareTo(aux.getKey()) == 1) {
+            } else if (key.compareTo(aux.getKey()) > 0) {
                 aux = aux.getRight();
 
             } else {
@@ -27,19 +29,22 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
         Node<K, V> newNode = new Node<K, V>(key, value);
 
+        newNode.setLeft(TNULL);
+        newNode.setRight(TNULL);
+        newNode.setParent(parent);
+
         if (parent == TNULL) {
-            this.root = newNode;
-
-        } else if (key.compareTo(newNode.getKey()) == -1) {
+            root = newNode;
+            newNode.setColor(Color.BLACK);
+        } else if (key.compareTo(parent.getKey()) < 0) {
             parent.setLeft(newNode);
-
         } else {
             parent.setRight(newNode);
         }
 
-        newNode.setParent(parent);
+        size++;
 
-        this.size++;
+        propriertiesAfterInsert(newNode);
     }
 
     @Override
@@ -76,6 +81,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
     private void rotateLeft(Node<K, V> node) {
         Node<K, V> right = node.getRight();
+        Node<K, V> oldParent = node.getParent();
 
         node.setRight(right.getLeft());
 
@@ -83,16 +89,27 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
             right.getLeft().setParent(node);
         }
 
+        right.setParent(oldParent);
+
+        if (oldParent == TNULL) {
+            root = right;
+
+        } else if (oldParent.getLeft() == node) {
+            oldParent.setLeft(right);
+
+        } else {
+            oldParent.setRight(right);
+        }
+
         right.setLeft(node);
 
         node.setParent(right);
-
-        changeDadsSons(node.getParent(), node, right);
 
     }
 
     private void rotateRight(Node<K, V> node) {
         Node<K, V> left = node.getLeft();
+        Node<K, V> oldParent = node.getParent();
 
         node.setLeft(left.getRight());
 
@@ -100,21 +117,31 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
             left.getRight().setParent(node);
         }
 
+        left.setParent(oldParent);
+
+        if (oldParent == TNULL) {
+            root = left;
+
+        } else if (oldParent.getRight() == node) {
+            oldParent.setRight(left);
+
+        } else {
+            oldParent.setLeft(left);
+        }
+
         left.setRight(node);
 
         node.setParent(left);
-
-        changeDadsSons(node.getParent(), node, left);
     }
 
     private void changeDadsSons(Node<K, V> parent, Node<K, V> oldSon, Node<K, V> newSon) {
         if (parent == TNULL) {
             this.root = newSon;
 
-        } else if (parent.getLeft().getKey().compareTo(oldSon.getKey()) == 0) {
+        } else if (parent.getLeft() == oldSon) {
             parent.setLeft(newSon);
 
-        } else if (parent.getRight().getKey().compareTo(oldSon.getKey()) == 0) {
+        } else if (parent.getRight() == oldSon) {
             parent.setRight(newSon);
 
         } else {
@@ -149,11 +176,6 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
         Node<K, V> uncle = getUncle(node);
 
-        if (grandParent == TNULL) {
-            parent.setColor(Color.BLACK);
-            return;
-        }
-
         if (uncle != TNULL && uncle.getColor() == Color.RED) {
             parent.setColor(Color.BLACK);
             grandParent.setColor(Color.RED);
@@ -187,6 +209,8 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
             grandParent.setColor(Color.RED);
 
         }
+
+        root.setColor(Color.BLACK);
     }
 
     private void propriertiesAfterDelete(Node<K, V> node) {
@@ -220,10 +244,13 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         Node<K, V> parent = node.getParent();
         Node<K, V> grandparent = parent.getParent();
 
-        if (grandparent.getLeft().getKey().compareTo(parent.getKey()) == 0)
+        if (grandparent == TNULL)
+            return TNULL;
+
+        if (grandparent.getLeft() == parent)
             return grandparent.getRight();
 
-        if (grandparent.getRight().getKey().compareTo(parent.getKey()) == 0)
+        if (grandparent.getRight() == parent)
             return grandparent.getLeft();
 
         throw new IllegalStateException();
@@ -231,6 +258,10 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
     private Node<K, V> getBrother(Node<K, V> node) {
         Node<K, V> parent = node.getParent();
+
+        if (parent == TNULL) {
+            return TNULL;
+        }
 
         if (node == parent.getLeft())
             return parent.getRight();
@@ -273,11 +304,9 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
     }
 
     private void handleRedBrother(Node<K, V> node, Node<K, V> brother) {
-        // Recolor...
         brother.setColor(Color.BLACK);
         node.getParent().setColor(Color.RED);
 
-        // ... and rotate
         if (node == node.getParent().getLeft()) {
             rotateLeft(node.getParent());
         } else {
@@ -290,9 +319,8 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         boolean nodeIsLeftChild = node == node.getParent().getLeft();
 
         if (nodeIsLeftChild && isBlack(brother.getRight())) {
-            brother.getLeft().setColor(Color.RED);
+            brother.getLeft().setColor(Color.BLACK);
             brother.setColor(Color.RED);
-            ;
             rotateRight(brother);
             brother = node.getParent().getRight();
         } else if (!nodeIsLeftChild && isBlack(brother.getLeft())) {

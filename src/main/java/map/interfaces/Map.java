@@ -1,3 +1,8 @@
+package map.interfaces;
+
+import java.util.Collection;
+import java.util.Set;
+
 public interface Map<K, V> {
 
     /**
@@ -36,4 +41,15 @@ public interface Map<K, V> {
 
     void clear();
 
+    Set<K> keySet();
+
+    Collection<V> values();
+
+    Set<Entry<K, V>> entrySet();
+
+    interface Entry<K, V> {
+        K getKey();
+
+        V getValue();
+    }
 }

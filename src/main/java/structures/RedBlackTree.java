@@ -1,3 +1,5 @@
+package structures;
+
 public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K, V> {
 
     public RedBlackTree() {
@@ -72,17 +74,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         this.size--;
     }
 
-    private int height(Node<K, V> node) {
-
-        if (node == TNULL)
-            return -1;
-
-        return 1 + Math.max(height(node.getLeft()), height(node.getRight()));
-
-    }
-
     private void rotateLeft(Node<K, V> node) {
-        Node<K, V> parent = node.getParent();
         Node<K, V> right = node.getRight();
 
         node.setRight(right.getLeft());
@@ -100,7 +92,6 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
     }
 
     private void rotateRight(Node<K, V> node) {
-        Node<K, V> parent = node.getParent();
         Node<K, V> left = node.getLeft();
 
         node.setLeft(left.getRight());

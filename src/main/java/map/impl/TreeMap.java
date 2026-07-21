@@ -14,11 +14,21 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
         tree = new RedBlackTree<>();
     }
 
+    /**
+     * Insere um novo elemento associado a uma chave, utilizando uma Árvore Preta e Vermelha com a lógica de mapas.
+     * @param key Chave que será associada ao valor, usada para determinar sua posição na árvore.
+     * @param value Valor que será relacionado à chave.
+     */
     @Override
     public void put(K key, V value) {
         tree.insert(key, value);
     }
 
+    /**
+     * Retorna o valor associado à chave passada como parâmetro. Realiza uma busca do nó correspondete à chave na árvore.
+     * @param key Chave relacionada ao valor que deve ser retornado.
+     * @return Valor associado à chave indicada. Retorna null caso a chave não esteja presente no mapa.
+     */
     @Override
     public V get(K key) {
 
@@ -31,22 +41,39 @@ public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
         return node.getValue();
     }
 
+    /**
+     * Remove o mapeamento da chave passada como parâmetro.
+     * @param key Chave que será removida, juntamente com seu valor, do mapa.
+     */
     @Override
     public void remove(K key) {
 
         tree.delete(key);
     }
 
+    /**
+     * Verifica a existência no mapa da chave passada como parâmetro.
+     * @param key Chave que será verificada.
+     * @return true se houver mapeamento da chave indicada ou false caso não haja.
+     */
     @Override
     public boolean containsKey(K key) {
         return tree.containsKey(key);
     }
 
+    /**
+     * Retorna a quantidade de elementos na árvore.
+     * @return Valor inteiro indicando o tamanho total da árvore.
+     */
     @Override
     public int size() {
         return tree.getSize();
     }
 
+    /**
+     * Verifica se a árvore está vazia.
+     * @return true caso não tenha elementos na árvore ou false caso tenha pelo menos um.
+     */
     @Override
     public boolean isEmpty() {
         return tree.isEmpty();

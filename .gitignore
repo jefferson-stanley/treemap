@@ -5,3 +5,11 @@ target/
 .idea/
 .vscode/
 *.class
+
+bin/
+
+venv/
+.venv/
+
+data/graphics/
+*.png

@@ -1,8 +1,7 @@
 package benchmark;
 
-import map.TreeMap;
+import map.impl.TreeMap;
 import utils.DataGenerator;
-
 import java.util.List;
 
 public class TreeMapBenchmark {
@@ -16,7 +15,7 @@ public class TreeMapBenchmark {
     }
 
     public Benchmark run(int[] sizes) {
-        String[] datasets = {"random", "sorted", "reverse"};
+        String[] datasets = { "random", "sorted", "reverse" };
 
         for (int size : sizes) {
             for (String datasetType : datasets) {
@@ -24,12 +23,14 @@ public class TreeMapBenchmark {
 
                 benchmark.register("MyTreeMap", "INSERT", datasetType, size, () -> {
                     TreeMap<Integer, Integer> tree = new TreeMap<>();
-                    for (int v : data) tree.put(v, v);
+                    for (int v : data)
+                        tree.put(v, v);
                 }, repetitions, warmup);
 
                 benchmark.register("JavaTreeMap", "INSERT", datasetType, size, () -> {
                     java.util.TreeMap<Integer, Integer> tree = new java.util.TreeMap<>();
-                    for (int v : data) tree.put(v, v);
+                    for (int v : data)
+                        tree.put(v, v);
                 }, repetitions, warmup);
 
                 TreeMap<Integer, Integer> myPrebuilt = new TreeMap<>();
@@ -40,11 +41,13 @@ public class TreeMapBenchmark {
                 }
 
                 benchmark.register("MyTreeMap", "SEARCH", datasetType, size, () -> {
-                    for (int v : data) myPrebuilt.get(v);
+                    for (int v : data)
+                        myPrebuilt.get(v);
                 }, repetitions, warmup);
 
                 benchmark.register("JavaTreeMap", "SEARCH", datasetType, size, () -> {
-                    for (int v : data) javaPrebuilt.get(v);
+                    for (int v : data)
+                        javaPrebuilt.get(v);
                 }, repetitions, warmup);
             }
         }
@@ -53,8 +56,8 @@ public class TreeMapBenchmark {
 
     private List<Integer> loadData(String type, int size) {
         return switch (type) {
-            case "random"  -> DataGenerator.generateRandomData(size);
-            case "sorted"  -> DataGenerator.generateSortedData(size);
+            case "random" -> DataGenerator.generateRandomData(size);
+            case "sorted" -> DataGenerator.generateSortedData(size);
             case "reverse" -> DataGenerator.generateReverseData(size);
             default -> throw new IllegalArgumentException("Dataset inválido: " + type);
         };

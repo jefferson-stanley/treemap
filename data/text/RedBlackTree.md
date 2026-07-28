@@ -71,7 +71,7 @@ A altura de uma árvore preto-vermelho é definida pelo maior caminho da raiz a 
 
 <figure style="text-align: center; margin: 30px auto;">
     <img src="../pics/RBTreeHeight.png" alt="example"
-        style="width: 70%; display: block; margin: 0 auto; max-width: 800px; height: auto;">
+        style="width: 50%; display: block; margin: 0 auto; max-width: 800px; height: auto;">
     <figcaption style="text-align: center; margin-top: 15px; max-width: 70%; margin-left: auto; margin-right: auto;">
         Altura de uma Árvore PV.
     </figcaption>

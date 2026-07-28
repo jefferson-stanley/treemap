@@ -81,10 +81,11 @@ A altura dessa árvore é 3, visto que o maior caminho da raiz até uma folha NI
 
 O caminho mais longo da raiz até uma folha nula não pode ser duas vezes maior que o menor caminho. Isso pode ser explicado da seguinte maneira: se uma árvore rubro-negra tem um black height constante, o menor caminho possível possui n nós pretos tal que n = black height. Já o maior caminho, deve possuir o maior número de nós vermelhos possível, e, seguindo a propriedade 4, a estrutura ótima é alternar as cores em "preto-vermelho-preto-vermelho".
 
-<figure style="text-align: center; margin: 20px auto;">
-    <img src="../pics/MinMaxLenght.png" style="width: 80%; display: block; margin: 0 auto;">
-    <figcaption style="text-align: center; margin-top: 8px;">
-        Maior e menor caminho em uma Árvore PV.
+<figure style="text-align: center; margin: 30px auto;">
+    <img src="../pics/MinMaxLenght.png" alt="example"
+        style="width: 50%; display: block; margin: 0 auto; max-width: 800px; height: auto;">
+    <figcaption style="text-align: center; margin-top: 15px; max-width: 70%; margin-left: auto; margin-right: auto;">
+        Maior e menor caminho de uma Árvore PV.
     </figcaption>
 </figure>
 

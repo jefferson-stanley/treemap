@@ -76,13 +76,20 @@ A altura de uma árvore preto-vermelho é definida pelo maior caminho da raiz a 
     </figcaption>
 </figure>
 
+<figure style="text-align: center; margin: 20px auto;">
+    <img src="../pics/RBTreeHeight.png" style="width: 80%; display: block; margin: 0 auto;">
+    <figcaption style="text-align: center; margin-top: 8px;">
+        Altura de uma Árvore PV.
+    </figcaption>
+</figure>
+
 A altura dessa árvore é 3, visto que o maior caminho da raiz até uma folha NIL possui 3 arestas.
 
 O caminho mais longo da raiz até uma folha nula não pode ser duas vezes maior que o menor caminho. Isso pode ser explicado da seguinte maneira: se uma árvore rubro-negra tem um black height constante, o menor caminho possível possui n nós pretos tal que n = black height. Já o maior caminho, deve possuir o maior número de nós vermelhos possível, e, seguindo a propriedade 4, a estrutura ótima é alternar as cores em "preto-vermelho-preto-vermelho".
 
-<figure style="text-align: center; width: 90%; margin: 0 auto;">
-    <img src="../pics/MinMaxLenght.png" style="max-width: 100%;">
-    <figcaption>
+<figure style="text-align: center; margin: 20px auto;">
+    <img src="../pics/MinMaxLenght.png" style="width: 80%; display: block; margin: 0 auto;">
+    <figcaption style="text-align: center; margin-top: 8px;">
         Maior e menor caminho em uma Árvore PV.
     </figcaption>
 </figure>

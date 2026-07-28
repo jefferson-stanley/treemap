@@ -69,16 +69,10 @@ Um nó NIL é um nó folha que não possui valor. Esse nó sentinela nos ajuda a
 
 A altura de uma árvore preto-vermelho é definida pelo maior caminho da raiz a uma folha NIL, ou seja, o número de arestas no maior caminho da raiz até qualquer folha nula.
 
-<figure style="text-align: center; width: 90%; margin: 0 auto;">
-    <img src="../pics/RBTreeHeight.png" style="max-width: 100%;">
-    <figcaption>
-        Altura de uma Árvore PV.
-    </figcaption>
-</figure>
-
-<figure style="text-align: center; margin: 20px auto;">
-    <img src="../pics/RBTreeHeight.png" style="width: 80%; display: block; margin: 0 auto;">
-    <figcaption style="text-align: center; margin-top: 8px;">
+<figure style="text-align: center; margin: 30px auto;">
+    <img src="../pics/RBTreeHeight.png" alt="example"
+        style="width: 70%; display: block; margin: 0 auto; max-width: 800px; height: auto;">
+    <figcaption style="text-align: center; margin-top: 15px; max-width: 70%; margin-left: auto; margin-right: auto;">
         Altura de uma Árvore PV.
     </figcaption>
 </figure>

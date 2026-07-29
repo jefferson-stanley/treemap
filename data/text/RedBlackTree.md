@@ -4,7 +4,9 @@
   - [Os Nós Nulos de Uma Árvore Preto-Vermelha](#os-nós-nulos-de-uma-árvore-preto-vermelha)
 - [Propriedades](#propriedades)
 - [Altura](#altura)
+- [Rotação](#rotação)
 <!--toc:end-->
+
 Imagine uma situação em que você precisa fazer múltiplas inserções e remoções na sua estrutura de árvore, ter o menor custo possível e manter o balanceamento para que operações como a busca continuem sendo executadas em complexidade $O(log(n))$. Baseada no conhecimento adquirido até agora na displina, a resposta natural seria o uso de uma árvore AVL, contudo, por possuir uma política de balanceamento muito rígida, a árvore AVL não consegue atender a essas condições.
 
 O balanceamento de uma árvore AVL exige que a diferença entre as subárvores esquerda e direita de qualquer nó não pode ser maior que 1. Consequentemente, as inserções e especialmente as remoções podem demandar muitas rotações para restaurar o equilíbrio e manter a árvore plana. Se uma aplicação faz muitas inserções/remoções, o custo de rebalanceamento pode ser alto. Para ocasiões em que você adiciona e/ou remove muitos dados, a melhor opção é uma Árvore Preto-Vermelha.
@@ -92,3 +94,31 @@ O caminho mais longo da raiz até uma folha nula não pode ser duas vezes maior 
 No exemplo acima, o menor caminho tem comprimento 2 e possui obrigatoriamente apenas nós pretos. Logo, o maior caminho possui comprimento 4 intercalando as cores dos nós.
 
 Podemos concluir que se o menor caminho possui **n** nós pretos, o maior caminho terá no máximo **2n** nós, sendo **n** nós pretos e **n** nós vermelhos. Ou seja, o maior caminho é no máximo o dobro do menor. Do ponto de vista computacional, essa característica é impressionante: se o caminho mais longo não pode ser muito maior que o mais curto, a operação de busca nunca será realizada em $O(n)$ e é garantido que sempre suficiente para que seja realizada em $O(log(n))$. Vale destacar que a operação de busca vai ser rápida, porém, um pouco mais lenta que a de uma árvore AVL.
+
+# Rotação
+
+As operações de inserção e remoção funcionam praticamente como numa árvore de busca binária comum. Após as operações, as propriedades da árvore vermelho-preta são checadas. Caso sejam descumpridas, dever ser restauradas por meio da recoloração de nós e rotações.
+
+Para qualquer rotação é preciso saber o seguinte:
+
+1. O filho do lado que está "pendendo" sobe e ocupa o lugar do pai;
+2. O pai desce e vira filho do antigo filho;
+3. Se o filho que subiu possuía uma subárvore para o lado oposto à rotação, essa subárvore vira filha do antigo pai.
+
+O conceito de "oposto" pode ser um pouco confuso, contudo, é mais simples do que você imagina: em uma rotação à esquerda, o lado oposto é o **esquerdo**, visto que a árvore está "pendendo" para a direita e precisamos distribuir a carga excessiva para a esquerda. Na rotação à direita, acontece o espelho perfeito.
+
+## Rotação à esquerda
+
+Para a rotação à esquerda, sabemos que a árvore está pendendo para a direita, então podemos identificar quem vai participar da rotação:
+
+- P: o pai(o nó que descerá);
+- R: o filho à direita;
+- RL: Caso R possua uma subárvore do lado oposto.
+
+<figure style="text-align: center; margin: 30px auto;">
+    <img src="../pics/RotationLeft.png" alt="example"
+        style="width: 50%; display: block; margin: 0 auto; max-width: 800px; height: auto;">
+    <figcaption style="text-align: center; margin-top: 15px; max-width: 70%; margin-left: auto; margin-right: auto;">
+        Exemplo de rotação à esquerda.
+    </figcaption>
+</figure>

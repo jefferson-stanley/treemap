@@ -39,14 +39,29 @@ public interface Map<K, V> {
      */
     boolean isEmpty();
 
+    /**
+     * Remove todos os pares de chave-valor presentes no mapa.
+     */
     void clear();
 
+    /**
+     * Retorna o cojunto de chaves do mapa.
+     * @return Set contendo as chaves mapeadas.
+     */
     Set<K> keySet();
 
+    /**
+     * Valores presentes no mapa.
+     * @return Coleção genérica contendo os valores.
+     */
     Collection<V> values();
 
+    /**
+     * Retorna os pares de chave-valor presentes no mapa.
+     * @return Set contendo os pares mapeados.
+     */
     Set<Entry<K, V>> entrySet();
-
+    
     interface Entry<K, V> {
         K getKey();
 

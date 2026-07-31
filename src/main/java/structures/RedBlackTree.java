@@ -78,7 +78,11 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
         this.size--;
     }
-
+    
+    /**
+     * Método que faz a rotação do nó para esquerda.
+     * @param node Nó que será rotacionado.
+     */
     private void rotateLeft(Node<K, V> node) {
         Node<K, V> right = node.getRight();
         Node<K, V> oldParent = node.getParent();
@@ -107,6 +111,10 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
     }
 
+    /**
+     * Método que faz a rotação do nó para direita.
+     * @param node Nó que será rotacionado.
+     */
     private void rotateRight(Node<K, V> node) {
         Node<K, V> left = node.getLeft();
         Node<K, V> oldParent = node.getParent();
@@ -134,6 +142,12 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         node.setParent(left);
     }
 
+    /**
+     * Altera filhos de um nó e o pai desses filhos.
+     * @param parent Nó pai onde seus filhos serão alterados.
+     * @param oldSon Antigos filhos do nó.
+     * @param newSon Novos filhos do nó.
+     */
     private void changeDadsSons(Node<K, V> parent, Node<K, V> oldSon, Node<K, V> newSon) {
         if (parent == TNULL) {
             this.root = newSon;
@@ -154,6 +168,10 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
     }
 
+    /**
+     * Faz a verificação do nó após sua inserção para manter a estrutura de uma Árvore Preta-Vermelha.
+     * @param node Nó que será verificado
+     */
     public void propriertiesAfterInsert(Node<K, V> node) {
         Node<K, V> parent = node.getParent();
 
@@ -211,8 +229,12 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         }
 
         root.setColor(Color.BLACK);
-    }
+    }   
 
+    /**
+     * Verifica a árvore após a remoção de um nó para manter a estrutura de uma Árvore Preta-Vermelha.
+     * @param node Nó que ocupa a posição do nó removido.
+     */
     private void propriertiesAfterDelete(Node<K, V> node) {
 
         if (node == this.root)
@@ -240,6 +262,11 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         }
     }
 
+    /**
+     * Retora o tio de um nó.
+     * @param node Nó referência para procura do seu tio.
+     * @return Nó referente ao tio do nó passado como parâmetro.
+     */
     private Node<K, V> getUncle(Node<K, V> node) {
         Node<K, V> parent = node.getParent();
         Node<K, V> grandparent = parent.getParent();
@@ -256,6 +283,11 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         throw new IllegalStateException();
     }
 
+    /**
+     * Retorna irmão do nó passado como parâmetro.
+     * @param node Nó referência para procura do seu irmão.
+     * @return Nó referente ao irmão do nó passado como parâmetro.
+     */
     private Node<K, V> getBrother(Node<K, V> node) {
         Node<K, V> parent = node.getParent();
 
@@ -272,6 +304,11 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
     }
 
+    /**
+     * Remove o nó que contém apenas um filho.
+     * @param node Nó que será removido
+     * @return O filho que substituiu o nó removido ou nulo caso o nó fosse folha
+     */
     private Node<K, V> deleteNodeMaximumOneSon(Node<K, V> node) {
         if (node.getLeft() != TNULL) {
             changeDadsSons(node.getParent(), node, node.getLeft());
@@ -291,7 +328,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         }
 
     }
-
+    
     private Node<K, V> min(Node<K, V> node) {
         while (node.getLeft() != TNULL) {
             node = node.getLeft();
@@ -302,7 +339,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
     private boolean isBlack(Node<K, V> node) {
         return node == TNULL || node.getColor() == Color.BLACK;
     }
-
+    
     private void handleRedBrother(Node<K, V> node, Node<K, V> brother) {
         brother.setColor(Color.BLACK);
         node.getParent().setColor(Color.RED);

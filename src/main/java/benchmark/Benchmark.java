@@ -1,7 +1,11 @@
 package benchmark;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Benchmark {
     private final List<BenchmarkResult> results = new ArrayList<>();
@@ -35,17 +39,17 @@ public class Benchmark {
             varianceSum += Math.pow(s - mean, 2);
         }
 
-        double stdDev;
+        double stdDevMs;
         if (rep > 1) {
-            stdDev = Math.sqrt(varianceSum / (rep - 1));
+            stdDevMs = Math.sqrt(varianceSum / (rep - 1));
         } else {
-            stdDev = 0.0;
+            stdDevMs = 0.0;
         }
 
-        results.add(new BenchmarkResult(structure, operation, dataset, inputsize, mean, stdDev));
+        results.add(new BenchmarkResult(structure, operation, dataset, inputsize, mean, stdDevMs));
         
         System.out.println(structure + " [" + operation + " | " + dataset + " | n=" + inputsize + 
-                "]: Média = " + mean + " ms | Desvio = " + stdDev + " ms");
+                            "]: Média = " + mean + " ms | Desvio = " + stdDevMs + " ms");
     }
 
     public void exportarCSV(String filePath) throws IOException {
@@ -56,7 +60,7 @@ public class Benchmark {
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            writer.write("structure,operation,dataset,len,averageTime,stdDev\n");
+            writer.write("structure,operation,dataset,len,averageTime,stdDevMs\n");
             for (BenchmarkResult result : results) {
                 writer.write(result.toCsvLine());
                 writer.newLine();

@@ -151,6 +151,7 @@ public abstract class BinarySearchTree<K extends Comparable<K>, V> {
      */
     public Collection<V> collectValues() {
         Collection<V> values = new ArrayList<>();
+        collectValuesAux(this.root, values);
 
         return values;
     }

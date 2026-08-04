@@ -5,7 +5,7 @@ import seaborn as sns
 
 os.makedirs("data/graphics", exist_ok=True)
 
-df = pd.read_csv("data/text/benchmark_results.csv")
+df = pd.read_csv("../data/text/benchmark_results.csv")
 
 sns.set_theme(style="whitegrid")
 
@@ -15,7 +15,7 @@ for operation in df["operation"].unique():
     subset = df[df["operation"] == operation]
 
     ax = sns.lineplot(
-        data=subset,  # type: ignore
+        data=subset,  
         x="len",
         y="averageTime",
         hue="structure",

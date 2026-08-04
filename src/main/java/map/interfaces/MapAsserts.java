@@ -1,8 +1,9 @@
 package map.interfaces;
 
-import map.impl.TreeMap;
 import java.util.Collection;
 import java.util.Set;
+
+import map.impl.TreeMap;
 
 public class MapAsserts {
 
@@ -114,6 +115,6 @@ public class MapAsserts {
         tests.testClear();
         tests.testViews();
 
-        System.out.println("Testes de Map executados com sucesso!");
+        System.out.println("Testes do Map executados com sucesso!");
     }
 }

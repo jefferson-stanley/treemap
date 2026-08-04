@@ -6,10 +6,10 @@ public record BenchmarkResult(
         String dataset,
         int inputsize,
         double averageTime,
-        double stdDev
+        double stdDevMs
 ) {
     public String toCsvLine() {
         return structure + "," + operation + "," + dataset + "," + 
-               inputsize + "," + averageTime + "," + stdDev;
+               inputsize + "," + averageTime + "," + stdDevMs;
     }
 }

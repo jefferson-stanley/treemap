@@ -1,5 +1,7 @@
 package benchmark;
 
+import java.io.File;
+
 public class BenchmarkRunner {
 
     public static void main(String[] args) {
@@ -14,7 +16,11 @@ public class BenchmarkRunner {
         Benchmark benchmark = suite.run(sizes);
 
         try {
-            String outputPath = "benchmark_results.csv";
+            File dir = new File("data/text");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            String outputPath = "data/text/benchmark_results.csv";
             benchmark.exportarCSV(outputPath);
             System.out.println("\n Benchmark finalizado, resultados salvos em: " + outputPath);
         } catch (Exception e) {

@@ -78,7 +78,13 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
         this.size--;
     }
-    
+
+     @Override
+    public void clear() {
+        super.clear();
+        this.size = 0;
+    }
+
     /**
      * Método que faz a rotação do nó para esquerda.
      * @param node Nó que será rotacionado.
@@ -162,7 +168,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
             throw new IllegalStateException();
         }
 
-        if (newSon != TNULL) {
+        if (newSon != null) {
             newSon.setParent(parent);
         }
 
@@ -229,7 +235,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         }
 
         root.setColor(Color.BLACK);
-    }   
+    }
 
     /**
      * Verifica a árvore após a remoção de um nó para manter a estrutura de uma Árvore Preta-Vermelha.
@@ -237,7 +243,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
      */
     private void propriertiesAfterDelete(Node<K, V> node) {
 
-        if (node == this.root)
+        if (node == null || node == this.root)
             return;
 
         Node<K, V> brother = getBrother(node);
@@ -245,6 +251,10 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         if (!isBlack(brother)) {
             handleRedBrother(node, brother);
             brother = getBrother(node);
+        }
+
+        if (brother == null || brother == TNULL) {
+            return;
         }
 
         if (isBlack(brother.getLeft()) && isBlack(brother.getRight())) {
@@ -289,6 +299,10 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
      * @return Nó referente ao irmão do nó passado como parâmetro.
      */
     private Node<K, V> getBrother(Node<K, V> node) {
+        if (node == null) {
+            return TNULL;
+        }
+
         Node<K, V> parent = node.getParent();
 
         if (parent == TNULL) {
@@ -300,7 +314,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         if (node == parent.getRight())
             return parent.getLeft();
 
-        throw new IllegalStateException();
+        return TNULL;
 
     }
 
@@ -328,7 +342,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         }
 
     }
-    
+
     private Node<K, V> min(Node<K, V> node) {
         while (node.getLeft() != TNULL) {
             node = node.getLeft();
@@ -339,7 +353,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
     private boolean isBlack(Node<K, V> node) {
         return node == TNULL || node.getColor() == Color.BLACK;
     }
-    
+
     private void handleRedBrother(Node<K, V> node, Node<K, V> brother) {
         brother.setColor(Color.BLACK);
         node.getParent().setColor(Color.RED);
@@ -378,4 +392,5 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         }
 
     }
+
 }

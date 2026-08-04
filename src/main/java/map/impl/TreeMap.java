@@ -3,8 +3,10 @@ package map.impl;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import structures.*;
-import map.interfaces.*;
+
+import map.interfaces.Map;
+import structures.Node;
+import structures.RedBlackTree;
 
 public class TreeMap<K extends Comparable<K>, V> implements Map<K, V> {
 

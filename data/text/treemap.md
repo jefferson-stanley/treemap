@@ -53,6 +53,7 @@ Vamos analisar como a estrutura armazena os pares de dados em memória e o que v
 
 As chaves numéricas identificam o produto e definem a posição exata na árvore. Note que a busca por qualquer chave segue perfeitamente a propriedade de busca binária, independente dos valores (nomes dos produtos) armazenados:
 
+```
 ┌─────────────────────────────────────────┐
 │              [ (50, "TV") ]  <-- Preto  │
 │               /          \              │
@@ -63,7 +64,7 @@ As chaves numéricas identificam o produto e definem a posição exata na árvor
 │  [ (20,"Fone") ] [ (40,"Mouse") ]  NIL  │
 │    <-- Preto       <-- Preto            │
 └─────────────────────────────────────────┘
-
+```
 
 #### Exemplos inválidos
 

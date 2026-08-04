@@ -5,6 +5,7 @@ target/
 .idea/
 .vscode/
 *.class
+*.txt
 
 bin/
 

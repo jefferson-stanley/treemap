@@ -184,7 +184,6 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         if (parent == TNULL) {
             node.setColor(Color.BLACK);
             return;
-
         }
 
         if (isBlack(parent)) {

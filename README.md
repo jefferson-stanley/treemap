@@ -29,6 +29,7 @@ Compile o repositório
 ``` 
 
 ```Os testes de unidade contém asserções para todas as classes utilizadas na TreeMap```
+
 **Para executá-los utilize a flag -ea(para habilitar os asserts de Java):**
 
 ```bash

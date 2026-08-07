@@ -312,8 +312,8 @@ Abaixo está a amostra dos nossos experimentos com gráficos e tabelas registran
 
 * **Vale ressaltar que o benchmark foi feito em um ambiente com as seguintes configurações:**
 
-| | | |   
-|--- | --- | --- |
+| | | 
+|--- | --- | 
 | *Processador* | Intel Core I7 150U 1.8GHz |
 | *Memória Ram* | 32GB |
 | *Sistem Operacional* | Windows 11 |

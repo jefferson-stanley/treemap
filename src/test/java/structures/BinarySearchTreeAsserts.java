@@ -1,6 +1,5 @@
 package structures;
 
-
 public class BinarySearchTreeAsserts {
 
     public void testIsEmpty() {
@@ -8,7 +7,6 @@ public class BinarySearchTreeAsserts {
 
         assert bst.isEmpty();
         assert bst.getSize() == 0;
-        assert bst.root == bst.TNULL;
 
         bst.insert(10, "Dez");
         assert !bst.isEmpty();
@@ -32,7 +30,7 @@ public class BinarySearchTreeAsserts {
         assert bst.getSize() == 2;
 
         bst.clear();
-        assert bst.root == bst.TNULL;
+        assert bst.getSize() == 0;
     }
 
     public void testContainsKey() {

@@ -56,7 +56,6 @@ public class TreeMapAsserts {
 
         assert map.size() == 3;
 
-       
         map.remove(20);
         assert map.size() == 2;
         assert !map.containsKey(20);

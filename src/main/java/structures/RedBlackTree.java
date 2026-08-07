@@ -44,7 +44,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
         size++;
 
-        propriertiesAfterInsert(newNode);
+        propertiesAfterInsert(newNode);
     }
 
     @Override
@@ -72,14 +72,14 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
         }
 
         if (deletedNodeColor == Color.BLACK) {
-            propriertiesAfterDelete(upNode);
+            propertiesAfterDelete(upNode);
 
         }
 
         this.size--;
     }
 
-     @Override
+    @Override
     public void clear() {
         super.clear();
         this.size = 0;
@@ -87,6 +87,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
     /**
      * Método que faz a rotação do nó para esquerda.
+     * 
      * @param node Nó que será rotacionado.
      */
     private void rotateLeft(Node<K, V> node) {
@@ -119,6 +120,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
     /**
      * Método que faz a rotação do nó para direita.
+     * 
      * @param node Nó que será rotacionado.
      */
     private void rotateRight(Node<K, V> node) {
@@ -150,6 +152,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
     /**
      * Altera filhos de um nó e o pai desses filhos.
+     * 
      * @param parent Nó pai onde seus filhos serão alterados.
      * @param oldSon Antigos filhos do nó.
      * @param newSon Novos filhos do nó.
@@ -175,10 +178,12 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
     }
 
     /**
-     * Faz a verificação do nó após sua inserção para manter a estrutura de uma Árvore Preta-Vermelha.
+     * Faz a verificação do nó após sua inserção para manter a estrutura de uma
+     * Árvore Preta-Vermelha.
+     * 
      * @param node Nó que será verificado
      */
-    public void propriertiesAfterInsert(Node<K, V> node) {
+    public void propertiesAfterInsert(Node<K, V> node) {
         Node<K, V> parent = node.getParent();
 
         if (parent == TNULL) {
@@ -204,7 +209,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
             grandParent.setColor(Color.RED);
             uncle.setColor(Color.BLACK);
 
-            propriertiesAfterInsert(grandParent);
+            propertiesAfterInsert(grandParent);
 
         } else if (parent == grandParent.getLeft()) {
 
@@ -237,10 +242,12 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
     }
 
     /**
-     * Verifica a árvore após a remoção de um nó para manter a estrutura de uma Árvore Preta-Vermelha.
+     * Verifica a árvore após a remoção de um nó para manter a estrutura de uma
+     * Árvore Preta-Vermelha.
+     * 
      * @param node Nó que ocupa a posição do nó removido.
      */
-    private void propriertiesAfterDelete(Node<K, V> node) {
+    private void propertiesAfterDelete(Node<K, V> node) {
 
         if (node == null || node == this.root)
             return;
@@ -263,7 +270,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
                 node.getParent().setColor(Color.BLACK);
 
             } else {
-                propriertiesAfterDelete(node.getParent());
+                propertiesAfterDelete(node.getParent());
             }
 
         } else {
@@ -273,6 +280,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
     /**
      * Retora o tio de um nó.
+     * 
      * @param node Nó referência para procura do seu tio.
      * @return Nó referente ao tio do nó passado como parâmetro.
      */
@@ -294,6 +302,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
     /**
      * Retorna irmão do nó passado como parâmetro.
+     * 
      * @param node Nó referência para procura do seu irmão.
      * @return Nó referente ao irmão do nó passado como parâmetro.
      */
@@ -319,6 +328,7 @@ public class RedBlackTree<K extends Comparable<K>, V> extends BinarySearchTree<K
 
     /**
      * Remove o nó que contém apenas um filho.
+     * 
      * @param node Nó que será removido
      * @return O filho que substituiu o nó removido ou nulo caso o nó fosse folha
      */

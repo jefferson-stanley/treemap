@@ -1,6 +1,6 @@
 # TreeMap
 
-Este repositório contém a implementação de uma **TreeMap** e um material didático do mesmo com testes de unidade e de eficiência em comparativo com a estrutura de dados já nativa de **Java**.
+Este repositório contém a implementação de um **TreeMap** e um material didático do mesmo com testes de unidade e de eficiência em comparativo com a estrutura de dados já nativa de **Java**.
 
 # Introdução
 
@@ -27,7 +27,7 @@ treemap
     │   └───java
     │       ├───benchmark       #Classes de execução e medição do benchmark
     │       ├───map
-    │       │   ├───impl        #Implementação da TreeMap
+    │       │   ├───impl        #Implementação do TreeMap
     │       │   └───interfaces  #Interfaces utilizadas na implementação do código
     │       ├───structures      #BST e árvore rubro-negra
     │       └───utils           #Geração de datasets para o benchmark
@@ -55,7 +55,7 @@ javac -d out (Get-ChildItem -Recurse -Filter *.java src\main\java, src\test\java
 
 ## Testes
 
-Os testes de unidade contêm asserções para todas as classes utilizadas na TreeMap
+Os testes de unidade contêm asserções para todas as classes utilizadas no TreeMap
 
 **Para executá-los utilize a flag -ea (para habilitar os asserts de Java):**
 
@@ -89,12 +89,12 @@ Os **testes de unidade** são feitos para cada camada da implementação da árv
 
 **BinarySearchTreeAsserts** - verifica as operações básicas de uma `árvore binária` como: inserção, remoção, tamanho e limpeza.  
 **RedBlackTreeAsserts** - verifica as propriedades de uma `árvore rubro-negra` como: balanceamento, rotações, cor da raiz e a atualização de chaves presentes na árvore.  
-**TreeMapAsserts** - verifica as propriedades da `TreeMap` com a implementação da interface `Map`.  
+**TreeMapAsserts** - verifica as propriedades do `TreeMap` com a implementação da interface `Map`.  
 **MapAsserts** - verifica as operações de um `Map` como: inserção, busca, verificação da chave e valor presente no mapa, remoção, limpeza do mapa e as views da coleção.  
 
 ### Benchmark
 
-O **benchmark** compara a `TreeMap` deste repositório com a de Java (`java.util.TreeMap`), medindo o tempo de execução das seguintes operações:
+O **benchmark** compara o `TreeMap` deste repositório com o de Java (`java.util.TreeMap`), medindo o tempo de execução das seguintes operações:
 
 **INSERT** - inserção dos elementos presentes no dataset.  
 **SEARCH** - busca dos elementos de uma estrutura já populada.  
@@ -118,13 +118,12 @@ Cada operação é executada para os tamanhos de entrada: **100, 1000, 10000, 10
 São executadas 5 repetições de aquecimento (*warmup*), excluídas da medição final, para reduzir o efeito de otimização da JVM.  
 Após isso, são executadas 30 repetições com seu tempo de execução cronometrado por `System.nanoTime()`. É calculado o tempo médio e o desvio padrão para cada tamanho de entrada.
 
-# Benchmark
+# Resultados do benchmark
 Abaixo está a amostra dos nossos experimentos com gráficos e tabelas registrando os dados coletados.
 
 ## Inserção:
 ![Gráfico de inserção](data/graphics/grafico_insert.png)
 
-### Resultados do benchmark
 * Dataset: *random*
 
 |Tamanho | MyTreeMap(ms) | JavaTreeMap(ms) |
@@ -178,7 +177,6 @@ Abaixo está a amostra dos nossos experimentos com gráficos e tabelas registran
 ## Busca:
 ![Gráfico de busca](data/graphics/grafico_search.png)
 
-### Resultados do benchmark
 * Dataset: *random*
 
 |Tamanho | MyTreeMap(ms) | JavaTreeMap(ms) |

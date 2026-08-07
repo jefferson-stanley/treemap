@@ -14,6 +14,30 @@ Produzir um material didático e prático completo sobre TreeMap com a implement
 
 Material didático sobre o funcionamento da estrutura de dados TreeMap no padrão da disciplina de Estrutura de Dados e Algoritmos da UFCG (Universidade Federal de Campina Grande). Contendo uma explicação detalhada da estrutura sobre seu funcionamento, implementação e exemplos práticos de sua usabilidade.
 
+# Estrutura do repositório
+```text
+treemap
+├───data            #Dados gerais do projeto.
+│   ├───graphics    #Gráficos gerados a partir do benchmark
+│   └───text        #CSV de resultados e material didático em markdown
+├───images          #Imagens utilizadas no markdown da entrega do projeto
+├───scripts         #Scripts utilizados no projeto
+├───src             #Diretório principal que contêm as implementações
+    ├───main
+    │   └───java
+    │       ├───benchmark       #Classes de execução e medição do benchmark
+    │       ├───map
+    │       │   ├───impl        #Implementação da TreeMap
+    │       │   └───interfaces  #Interfaces utilizadas na implementação do código
+    │       ├───structures      #BST e árvore rubro-negra
+    │       └───utils           #Geração de datasets para o benchmark
+    └───test        #Diretório contendo os testes de unidade                  
+        └───java
+            ├───map
+            │   ├───impl        
+            │   └───interfaces
+            └───structures
+```
 # Como rodar os testes
 Para que os testes funcionem corretamente é necessário ter `Java 17+` e para gerar os gráficos(opcional) será necessário ter `Python 3` instalado em sua máquina.
 
@@ -21,12 +45,12 @@ Primeiro compile o repositório
 
 **Linux/macOS**
 ```bash
-javac -d out $(find src/main/java -name "*.java")
+javac -d out $(find src/main/java src/test/java -name "*.java")
 ```
 
 **Windows (PowerShell)**
 ```powershell
-javac -d out (Get-ChildItem -Recurse -Filter *.java src\main\java).FullName
+javac -d out (Get-ChildItem -Recurse -Filter *.java src\main\java, src\test\java).FullName
 ``` 
 
 ## Testes
@@ -50,12 +74,12 @@ java -cp out benchmark.BenchmarkRunner
 
 ## Gráficos
 
-**Os resultados do benchmark ficam amarzenados em [data/text/benchmark_results.csv](data/text/benchmark_results.csv). Para gerar os gráficos basta executar os seguintes comandos na raíz do repositório:**
+**Os resultados do benchmark ficam armazenados em [data/text/benchmark_results.csv](data/text/benchmark_results.csv). Para gerar os gráficos basta executar os seguintes comandos na raiz do repositório:**
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install pandas matplotlib seaborn
-python3 data/text/scripts/ plot.py
+python3 scripts/plot.py
 ```
 
 
@@ -68,9 +92,6 @@ Os **testes de unidade** são feitos para cada camada da implementação da árv
 **TreeMapAsserts** - verifica as propriedades da `TreeMap` com a implementação da interface `Map`.  
 **MapAsserts** - verifica as operações de um `Map` como: inserção, busca, verificação da chave e valor presente no mapa, remoção, limpeza do mapa e as views da coleção.  
 
-
-Utilizando os asserts de Java para fazer essa verificação em todas as classes de teste.
-
 ### Benchmark
 
 O **benchmark** compara a `TreeMap` deste repositório com a de Java (`java.util.TreeMap`), medindo o tempo de execução das seguintes operações:
@@ -78,7 +99,7 @@ O **benchmark** compara a `TreeMap` deste repositório com a de Java (`java.util
 **INSERT** - inserção dos elementos presentes no dataset.  
 **SEARCH** - busca dos elementos de uma estrutura já populada.  
 **DELETE** - remoção dos elementos de uma estrutura já populada.  
-**MIXED_WOARKLOAD** - uma carga de trabalho mista com 70% de busca, 20% de inserção e 10% de remoção para ter uma visão mais prática do funcionamento das estruturas.
+**MIXED_WORKLOAD** - uma carga de trabalho mista com 70% de busca, 20% de inserção e 10% de remoção para ter uma visão mais prática do funcionamento das estruturas.
 
 ### Datasets
 
@@ -318,21 +339,35 @@ Abaixo está a amostra dos nossos experimentos com gráficos e tabelas registran
 |--- | --- | 
 | *Processador* | Intel Core I7 150U 1.8GHz |
 | *Memória Ram* | 32GB |
-| *Sistem Operacional* | Windows 11 |
+| *Sistema Operacional* | Windows 11 |
 
 ## Ameaças à validade
-### É possivel generalizar nossa experimentação para outras cargas?
+### É possível generalizar nossa experimentação para outras cargas?
 
-Não completamente já que nossos experimentos foram feitos unicamente com `chaves` do tipo `inteiro`. Sendo assim, não podemos afirmar que os resultados podem ser generalizados para outras cargas já que operações que fazem comparações entre dados inteiros são pouco custosas em comparação com `Strings` longas ou objetos mais complexos que inteiros.
+Não completamente, já que nossos experimentos foram feitos unicamente com `chaves` do tipo `inteiro`. Sendo assim, não podemos afirmar que os resultados podem ser generalizados para outras cargas já que operações que fazem comparações entre dados inteiros são pouco custosas em comparação com `Strings` longas ou objetos mais complexos que inteiros.
 
-Pode-se levar em cosideração também o teste de *carga de trabalho mista* no qual foi feito usando uma única proporção(`70% de busca, 20% de inserção e 10% de remoção`). Dessa forma, não podemos afirmar que esse teste assumiria os mesmos resultados comparativos utilizando diferentes proporções.
+Pode-se levar em consideração também o teste de *carga de trabalho mista* no qual foi feito usando uma única proporção(`70% de busca, 20% de inserção e 10% de remoção`). Dessa forma, não podemos afirmar que esse teste assumiria os mesmos resultados comparativos utilizando diferentes proporções.
 ### Vieses de medição: 
 Repetições de preparação(*warmup*): Em alguns casos, o número de repetições de warmup pode não ser suficiente para preparar a JVM e utilizá-la otimizada durante toda a medição, principalmente para entradas grandes.
 
 Em todos os experimentos ambas as estruturas (*MyTreeMap* e *JavaTreeMap*) são executadas na mesma JVM. Com isso, os resultados podem ser comprometidos, principalmente nas execuções com entradas muito grandes, pela forma como o `Garbage Collector` de Java funciona.
+
+## Considerações finais
+`TreeMap` é uma estrutura de dados utilizada para manter pares de chave-valor sempre ordenados, possibilitando operações de inserção, busca e remoção sempre em O(log n) em diversas aplicações. Na implementação presente neste repositório foi possível identificar uma média de tempo de execução ligeiramente maior, principalmente em cargas consideravelmente maiores, comparada à estrutura implementada por `java.util.TreeMap`.
+
+Abaixo segue uma análise mais detalhada, em percentual, da diferença da estrutura implementada neste repositório (*MyTreeMap*) com a padrão de Java.
+
+| **Operação** | **Resultado comparativo** |
+| ------------ | --------- | 
+| INSERT | MyTreeMap 1,4% mais lento |
+| SEARCH | MyTreeMap 7,9% mais rápido |
+| DELETE | MyTreeMap 34% mais rápido |
+| MIXED_WORKLOAD | MyTreeMap 6,4% mais lento |
 
 # Autores
 * **[Caio Santos](https://github.com/caio-brito-santos)**  
 * **[Igor Chaves](https://github.com/igor3chaves)**  
 * **[Jefferson Stanley](https://github.com/jefferson-stanley)**  
 * **[Pedro Barbosa](https://github.com/barbosapdr)**  
+
+

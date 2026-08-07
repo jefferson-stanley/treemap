@@ -28,7 +28,7 @@ Imagine um cenário em que uma turma participe de um Amigo Secreto e para não h
 
 Com esse exemplo é possível pensar em diversas outras situações em que seria ideal a utilização de um TreeMap para a resolução de um problema.
 
-## Como manter a árvore ordenada? 
+### Como manter a árvore ordenada? 
 
 Para que seja possível manter a árvore ordenada, sem que se saiba com antecedência qual o tipo de dado que ele irá armazenar, a linguagem precisa de algum mecanismo que possibilitará comparar dois objetos e dizer qual vem antes do outro.
 
@@ -42,11 +42,11 @@ Basicamente, a diferença entre as duas estratégias está na forma em que se de
 
 ## Regras de Organização do TreeMap
 
-Por ser baseado em Árvore PV, é ela quem vai cuidardo balanceamento e das rotações por trás dos panos, o trabalho do TreeMap vai ser garantir que os pares (Chave, Valor) estejam organizados corretamente.
+Por ser baseado em Árvore PV, é ela quem vai cuidar do balanceamento e das rotações por trás dos panos, o trabalho do TreeMap vai ser garantir que os pares (Chave, Valor) estejam organizados corretamente.
 
 Temos três regras para garantir o funcionamento e a organização do TreeMap:
 
-Ordenação Obrigatória por Chave: toda a ordenação é baseada nas chaves, em que obrigatoriamente a chave à esquerda é menor e a chave à direita é maior, de acordo com que parametro está sendo utilizade para a ordenação (númerica, alfabética, etc).
+Ordenação Obrigatória por Chave: toda a ordenação é baseada nas chaves, em que obrigatoriamente a chave à esquerda é menor e a chave à direita é maior, de acordo com qual parâmetro está sendo utilizado para a ordenação (númerica, alfabética, etc).
 
 Unicidade de Chaves: o mapa não permite chaves duplicadas. Caso tentarmos inserir uma chave já existente, o valor associado a ela é sobrescrito.
 
@@ -60,30 +60,15 @@ Vamos analisar como a estrutura armazena os pares de dados em memória e o que v
 
 As chaves numéricas identificam o produto e definem a posição exata na árvore. Note que a busca por qualquer chave segue perfeitamente a propriedade de busca binária, independente dos valores (nomes dos produtos) armazenados:
 
-```
-┌─────────────────────────────────────────┐
-│              [ (50, "TV") ]  <-- Preto  │
-│               /          \              │
-│              /            \             │
-│    [ (30, "Som") ]    [ (70, "PC") ]    │
-│      <-- Vermelho       <-- Vermelho    │
-│       /        \          /        \    │
-│  [ (20,"Fone") ] [ (40,"Mouse") ]  NIL  │
-│    <-- Preto       <-- Preto            │
-└─────────────────────────────────────────┘
-```
+![exemplovalido](https://raw.githubusercontent.com/jefferson-stanley/treemap/refs/heads/main/images/exemploValido.png)
 
 #### Exemplos inválidos
 
     Violação da Propriedade de Busca (Ordenação incorreta):
 
-    [ (50, "TV") ] (Preto)
-      /
-    [ (60, "Teclado") ] (Vermelho)
- 
-    
-É inválido porque a chave `60` é maior que a chave `50`, mas está alocada na subárvore à esquerda, o que quebra o algoritmo de busca (`get`), que vai buscar `60` à direita e não o encontrará.
+![exemploinvalido](https://raw.githubusercontent.com/jefferson-stanley/treemap/refs/heads/main/images/exemploInvalido.png)
 
+É inválido porque a chave `60` é maior que a chave `50`, mas está alocada na subárvore à esquerda, o que quebra o algoritmo de busca (`get`), que vai buscar `60` à direita e não o encontrará.
 
 ## Modelagem da Classe e Estrutura do Nó
 
@@ -97,12 +82,10 @@ Vejamos uma versão simplificada de como a classe `TreeMap` e seu nó interno (`
 public class TreeMap<K, V> {
 
     private Entry<K, V> root;
-    private int size;
     private Comparator<? super K> comparator;
 
     public TreeMap() {
         this.root = null;
-        this.size = 0;
         this.comparator = null;
     }
 
@@ -113,10 +96,6 @@ public class TreeMap<K, V> {
 
     public boolean isEmpty() {
         return this.root == null;
-    }
-
-    public int size() {
-        return this.size;
     }
 
     // Nó interno que representa cada par (Chave, Valor) no mapa
@@ -153,7 +132,7 @@ A operação de busca no TreeMap vai reaproveitar a lógica clássica da Árvore
 
 Seguindo essa lógica:
 
-A busca comecará pela raiz. Se a chave procurada for menor que a chave atual, caminhamos para a subárvore à esquerda. Se for maior, caminhamos para a direita. Se for igual, encontramos a chave e retornamos o seu valor correspondente. Se alcançarmos uma referência nula (null), a chave não está presente no mapa.
+A busca começará pela raiz. Se a chave procurada for menor que a chave atual, caminhamos para a subárvore à esquerda. Se for maior, caminhamos para a direita. Se for igual, encontramos a chave e retornamos o seu valor correspondente. Se alcançarmos uma referência nula (null), a chave não está presente no mapa.
 
 ### Inserção no TreeMap (put)
 
@@ -161,13 +140,13 @@ A inserção de um novo par (Chave, Valor) vai ser dividido em duas etapas princ
 
 Inserção no padrão BST: faremos uma navegação pela árvore usando o Comparable ou Comparator até encontrar a posição que seja adequada para a chave. Se a chave já existir, apenas substituímos o valor atual. Se não existir, inserimos o novo nó Entry<K,V> como uma folha ```Vermelha```.
 
-Rebalanceamento: nesso processo de inserir um novo nó vermelho, podemos violar as regras da Árvore Preto-Vermelha (como ter dois nós vermelhos em sequência). É nesse caso que entra o algoritmo de ajuste:
+Rebalanceamento: nesse processo de inserir um novo nó vermelho, podemos violar as regras da Árvore Preto-Vermelha (como ter dois nós vermelhos em sequência). É nesse caso que entra o algoritmo de ajuste:
 
 Ele analisa a cor do "tio" do nó inserido para executar as rotações ou trocas de cores necessárias para restaurar o balanceamento da árvore. Tudo isso já foi explicado no material de [Árvore Preto-vermelha](link).
 
-### Fatiamento do mapa
+### Fatiamento do mapa (subMap)
 
-Uma das vantagens mais fáceis de ser observada sobre mapas não-ordenados (HashMap) é a capacidade de realizar consultas/buscas por intervalos sem que seja necessário percorrer todos os elementos do mapa.
+Uma das vantagens mais fáceis de ser observada em relação a mapas não-ordenados é a capacidade de realizar consultas/buscas por intervalos sem que seja necessário percorrer todos os elementos do mapa.
 
 ```java
 TreeMap<Double, String> lojasPorPreco = new TreeMap<>();
@@ -184,6 +163,23 @@ NavigableMap<Double, String> lojasIdeais = lojasPorPreco.subMap(75.0, true, 130.
 System.out.println(lojasIdeais);
 ```
 
+### Outros métodos
+
+Alguns outros métodos do TreeMap que são relevantes para serem mencionados:
+
+***firstEntry()*** retorna o par (Chave, Valor) associado à menor chave no mapa.
+
+***firstKey()*** retorna a menor Chave do mapa.
+
+***lastEntry()*** retorna o par (Chave, Valor) associado à maior chave no mapa.
+
+***lastKey()*** retorna a maior Chave do mapa.
+
+***lowerKey(K key)*** retorna a maior Chave estritamente menor que a Chave passada como parâmetro.
+
+***higherKey(K key)*** retorna a menor Chave estritamente maior que a Chave passada como parâmetro.
+
+
 ## Considerações finais
 
-O TreeMap é a escolha ideal quando a aplicação exige acesso indexado por intervalos, busca por proximidade ou navegação constante por elementos em ordem estrita. Embora possua um overhead maior de memória por nó (devido aos ponteiros de parentes e cor) e um custo de inserção ligeiramente maior do que o HashMap devido ao rebalanceamento, ele entrega buscas com performance previsível e garantida de $O(\log n)$ em qualquer cenário.
+Devido às propriedades e às vantagens que o TreeMap apresenta, ele é a escolha ideal quando a aplicação exige acesso indexado por intervalos, busca por proximidade ou navegação constante por elementos em ordem estrita. Embora possua um overhead maior de memória por nó (devido aos ponteiros de pai e cor) e um custo de inserção/remoção ligeiramente maior do que o HashMap devido ao rebalanceamento, ele entrega buscas com performance previsível e garantida de $O(\log n)$ em qualquer cenário.

@@ -50,12 +50,14 @@ java -cp out benchmark.BenchmarkRunner
 
 ## Gráficos
 
-**Os resultados do benchmark ficam amarzenados em [data/text/benchmark_results.csv](data/text/benchmark_results.csv). Para gerar os gráficos basta executar os seguintes comandos:**
+**Os resultados do benchmark ficam amarzenados em [data/text/benchmark_results.csv](data/text/benchmark_results.csv). Para gerar os gráficos basta executar os seguintes comandos na raíz do repositório:**
 ```bash
-cd scripts
+python3 -m venv .venv
+source .venv/bin/activate
 pip install pandas matplotlib seaborn
-python plot.py
+python3 data/text/scripts/ plot.py
 ```
+
 
 # Metodologia
 ### Testes de unidade
@@ -212,51 +214,51 @@ Abaixo está a amostra dos nossos experimentos com gráficos e tabelas registran
 
 |Tamanho | MyTreeMap(ms) | JavaTreeMap(ms) |
 |---|---|---|
-| 100 | 0.038490 | 0.038060 |
-| 1000 | 0.231087 | 0.181873 |
-| 10000 | 2.232950 | 2.158990 |
-| 100000 | 40.353910 | 38.740230 |
-| 1000000 | 1663.655473 | 1829.217693 |
+| 100 | 0.008310 | 0.006920 | 
+| 1000 | 0.049157 | 0.021340 |
+| 10000 | 0.034280 | 0.071153 |
+| 100000 | 0.202933 | 0.551467 |
+| 1000000 | 3.597983 | 3.320947 |
 
 * Dataset: *sorted*
 
 |Tamanho | MyTreeMap(ms) | JavaTreeMap(ms) |
 |---|---|---|
-| 100 | 0.049343 | 0.110107 | 
-| 1000 | 0.119750 | 0.152927 |
-| 10000 | 0.808210 | 0.779810 |
-| 100000 | 14.734937 | 13.298353 |
-| 1000000 | 150.193110 | 143.050723 |
+| 100 | 0.013603 | 0.013850 | 
+| 1000 | 0.033923 | 0.034067 |
+| 10000 | 0.029050 | 0.018400 |
+| 100000 | 0.146880 | 0.147883 |
+| 1000000 | 2.668370 | 3.107987 |
 
 * Dataset: *reverse*
 
 |Tamanho | MyTreeMap(ms) | JavaTreeMap(ms) |
 |---|---|---|
-| 100 | 0.019060 | 0.026883 |
-| 1000 | 0.082590 | 0.071270 |
-| 10000 | 0.795943 | 0.675307 |
-| 100000 | 13.055067 | 11.810177 |
-| 1000000 | 142.661820 | 135.898617 |
+| 100 | 0.025553 | 0.020687 | 
+| 1000 | 0.001410 | 0.014757 |
+| 10000 | 0.026800 | 0.014437 |
+| 100000 | 0.176703 | 0.166730 |
+| 1000000 | 2.776337 | 4.692333 |
 
 * Dataset: *nearly_sorted*
 
 |Tamanho | MyTreeMap(ms) | JavaTreeMap(ms) |
 |---|---|---|
-| 100 | 0.017483 | 0.006157 |
-| 1000 | 0.104243 | 0.126097 |
-| 10000 | 1.488433 | 1.370757 |
-| 100000 | 25.083693 | 24.530923 |
-| 1000000 | 471.246363 | 434.026320 |
+| 100 | 0.017973 | 0.029960 | 
+| 1000 | 0.001053 | 0.004463 |
+| 10000 | 0.012083 | 0.013133 |
+| 100000 | 0.144520 | 0.169970 |
+| 1000000 | 3.119027 | 6.026147 |
 
 * Dataset: *duplicates*
 
 |Tamanho | MyTreeMap(ms) | JavaTreeMap(ms) |
 |---|---|---|
-| 100 | 0.010597 | 0.005930 |
-| 1000 | 0.028193 | 0.036920 |
-| 10000 | 0.377490 | 0.341830 |
-| 100000 | 3.960160 | 3.842133 |
-| 1000000 | 41.250253 | 39.329247 |
+| 100 | 0.002983 | 0.000757 | 
+| 1000 | 0.001230 | 0.001330 |
+| 10000 | 0.013053 | 0.014850 |
+| 100000 | 0.160507 | 0.173857 |
+| 1000000 | 5.224163 | 9.387407 |
 
 ## Carga de trabalho mista:
 ![Gráfico de carga de trabalho mista](data/graphics/grafico_mixed_workload.png)
@@ -264,51 +266,51 @@ Abaixo está a amostra dos nossos experimentos com gráficos e tabelas registran
 
 |Tamanho | MyTreeMap(ms) | JavaTreeMap(ms) |
 |---|---|---|
-| 100 | 0.026950 | 0.079556 |
-| 1000 | 0.236487 | 0.179607 |
-| 10000 | 2.279833 | 2.303287 |
-| 100000 | 52.197650 | 57.695787 |
-| 1000000 | 1744.929953 | 1867.376700 |
+| 100 | 0.043763 | 0.008707 |
+| 1000 | 0.081963 | 0.037543 |
+| 10000 | 0.811203 | 0.828363 |
+| 100000 | 21.124370 | 29.181797 |
+| 1000000 | 1495.698780 | 1316.047287 |
 
 * Dataset: *sorted*
 
 |Tamanho | MyTreeMap(ms) | JavaTreeMap(ms) |
 |---|---|---|
-| 100 | 0.042883 | 0.037047 | 
-| 1000 | 0.189990 | 0.166570 |
-| 10000 | 1.659787 | 1.788107 |
-| 100000 | 51.545837 | 45.384610 |
-| 1000000 | 1025.336167 | 1017.061430 |
+| 100 | 0.039307 | 0.034947 | 
+| 1000 | 0.085147 | 0.073283 |
+| 10000 | 1.192143 | 1.235887 |
+| 100000 | 20.165497 | 26.713170 |
+| 1000000 | 1526.681400 | 1511.295303 |
 
 * Dataset: *reverse*
 
 |Tamanho | MyTreeMap(ms) | JavaTreeMap(ms) |
 |---|---|---|
-| 100 | 0.030630 | 0.033030 |
-| 1000 | 0.099330 | 0.092907 |
-| 10000 | 1.589710 | 1.709173 |
-| 100000 | 40.477637 | 40.779010 |
-| 1000000 | 1011.911620 | 1041.278630 |
+| 100 | 0.034773 | 0.047437 |
+| 1000 | 0.104867 | 0.107047 |
+| 10000 | 1.497177 | 0.929877 |
+| 100000 | 27.243153 | 22.962893 |
+| 1000000 | 1518.725507 | 1436.591797 |
 
 * Dataset: *nearly_sorted*
 
 |Tamanho | MyTreeMap(ms) | JavaTreeMap(ms) |
 |---|---|---|
-| 100 | 0.007170 | 0.016713 |
-| 1000 | 0.111030 | 0.102850 |
-| 10000 | 2.011827 | 2.000830 |
-| 100000 | 47.466727 | 49.508213 |
-| 1000000 | 1301.736890 | 1336.462623 |
+| 100 | 0.019407 | 0.010800 |
+| 1000 | 0.026980 | 0.048603 |
+| 10000 | 1.165010 | 0.858630 |
+| 100000 | 25.454013 | 21.272887 |
+| 1000000 | 1508.008423 | 1330.331813 |
 
 * Dataset: *duplicates*
 
 |Tamanho | MyTreeMap(ms) | JavaTreeMap(ms) |
 |---|---|---|
-| 100 | 0.005563 | 0.007467 |
-| 1000 | 0.066910 | 0.041913 |
-| 10000 | 0.604013 | 0.654113 |
-| 100000 | 7.417937 | 7.604673 |
-| 1000000 | 105.313793 | 105.468160 |
+| 100 | 0.002407 | 0.002457 |
+| 1000 | 0.024980 | 0.038137 |
+| 10000 | 0.335620 | 0.291567 |
+| 100000 | 3.392183 | 3.787227 |
+| 1000000 | 131.725520 | 204.674390 |
 
 * **Vale ressaltar que o benchmark foi feito em um ambiente com as seguintes configurações:**
 
@@ -318,3 +320,19 @@ Abaixo está a amostra dos nossos experimentos com gráficos e tabelas registran
 | *Memória Ram* | 32GB |
 | *Sistem Operacional* | Windows 11 |
 
+## Ameaças à validade
+### É possivel generalizar nossa experimentação para outras cargas?
+
+Não completamente já que nossos experimentos foram feitos unicamente com `chaves` do tipo `inteiro`. Sendo assim, não podemos afirmar que os resultados podem ser generalizados para outras cargas já que operações que fazem comparações entre dados inteiros são pouco custosas em comparação com `Strings` longas ou objetos mais complexos que inteiros.
+
+Pode-se levar em cosideração também o teste de *carga de trabalho mista* no qual foi feito usando uma única proporção(`70% de busca, 20% de inserção e 10% de remoção`). Dessa forma, não podemos afirmar que esse teste assumiria os mesmos resultados comparativos utilizando diferentes proporções.
+### Vieses de medição: 
+Repetições de preparação(*warmup*): Em alguns casos, o número de repetições de warmup pode não ser suficiente para preparar a JVM e utilizá-la otimizada durante toda a medição, principalmente para entradas grandes.
+
+Em todos os experimentos ambas as estruturas (*MyTreeMap* e *JavaTreeMap*) são executadas na mesma JVM. Com isso, os resultados podem ser comprometidos, principalmente nas execuções com entradas muito grandes, pela forma como o `Garbage Collector` de Java funciona.
+
+# Autores
+* **[Caio Santos](https://github.com/caio-brito-santos)**  
+* **[Igor Chaves](https://github.com/igor3chaves)**  
+* **[Jefferson Stanley](https://github.com/jefferson-stanley)**  
+* **[Pedro Barbosa](https://github.com/barbosapdr)**  

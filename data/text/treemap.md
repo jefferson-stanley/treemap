@@ -61,13 +61,23 @@ Vamos analisar como a estrutura armazena os pares de dados em memória e o que v
 
 As chaves numéricas identificam o produto e definem a posição exata na árvore. Note que a busca por qualquer chave segue perfeitamente a propriedade de busca binária, independente dos valores (nomes dos produtos) armazenados:
 
-![exemplovalido](exemploValido.png)
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="exemploValido.png">
+    <figcaption align="center">
+        Exemplo de TreeMap válido
+    </figcaption>
+</figure>
 
 #### Exemplos inválidos
 
     Violação da Propriedade de Busca (Ordenação incorreta):
 
-![exemploinvalido](exemploInvalido.png)
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="exemploInvalido.png">
+    <figcaption align="center">
+        Exemplo de TreeMap inválido
+    </figcaption>
+</figure>
 
 É inválido porque a chave `60` é maior que a chave `50`, mas está alocada na subárvore à esquerda, o que quebra o algoritmo de busca (`get`), que vai buscar `60` à direita e não o encontrará.
 
@@ -195,3 +205,8 @@ Alguns outros métodos do TreeMap que são relevantes para serem mencionados:
 ## Considerações finais
 
 Devido às propriedades e às vantagens que o TreeMap apresenta, ele é a escolha ideal quando a aplicação exige acesso indexado por intervalos, busca por proximidade ou navegação constante por elementos em ordem estrita. Embora possua um overhead maior de memória por nó (devido aos ponteiros de pai e cor) e um custo de inserção/remoção ligeiramente maior do que o HashMap devido ao rebalanceamento, ele entrega buscas com performance previsível e garantida de $O(\log n)$ em qualquer cenário.
+
+## Contribuições
+
+[Jefferson Stanley](https://github.com/jefferson-stanley) contribuiu para a escrita deste post.\
+[Pedro Barbosa](https://github.com/barbosapdr) contribuiu para a escrita deste post.

@@ -53,27 +53,23 @@ public class TreeMapBenchmark {
                 }, repetitions, warmup);
 
                 benchmark.register("MyTreeMap", "DELETE", datasetType, size, () -> {
-                    TreeMap<Integer, Integer> tree = buildMyTree(data);
                     for (int v : data) {
-                        tree.remove(v);
+                        myPrebuilt.remove(v);
                     }
                 }, repetitions, warmup);
 
                 benchmark.register("JavaTreeMap", "DELETE", datasetType, size, () -> {
-                    java.util.TreeMap<Integer, Integer> tree = buildJavaTree(data);
                     for (int v : data) {
-                        tree.remove(v);
+                        javaPrebuilt.remove(v);
                     }
                 }, repetitions, warmup);
 
                 benchmark.register("MyTreeMap", "MIXED_WORKLOAD", datasetType, size, () -> {
-                    TreeMap<Integer, Integer> tree = buildMyTree(data);
-                    runMixedMyTree(tree, data);
+                    runMixedMyTree(myPrebuilt, data);
                 }, repetitions, warmup);
 
                 benchmark.register("JavaTreeMap", "MIXED_WORKLOAD", datasetType, size, () -> {
-                    java.util.TreeMap<Integer, Integer> tree = buildJavaTree(data);
-                    runMixedJavaTree(tree, data);
+                    runMixedJavaTree(javaPrebuilt, data);
                 }, repetitions, warmup);
             }
         }

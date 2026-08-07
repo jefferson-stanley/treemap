@@ -3,6 +3,7 @@ title = "TreeMap"
 date = 2026-08-06
 tags = []
 categories = []
+github = "https://github.com/jefferson-stanley/treemap" 
 +++
 
 # TreeMap
@@ -60,13 +61,13 @@ Vamos analisar como a estrutura armazena os pares de dados em memória e o que v
 
 As chaves numéricas identificam o produto e definem a posição exata na árvore. Note que a busca por qualquer chave segue perfeitamente a propriedade de busca binária, independente dos valores (nomes dos produtos) armazenados:
 
-![exemplovalido](https://raw.githubusercontent.com/jefferson-stanley/treemap/refs/heads/main/images/exemploValido.png)
+![exemplovalido](exemploValido.png)
 
 #### Exemplos inválidos
 
     Violação da Propriedade de Busca (Ordenação incorreta):
 
-![exemploinvalido](https://raw.githubusercontent.com/jefferson-stanley/treemap/refs/heads/main/images/exemploInvalido.png)
+![exemploinvalido](exemploInvalido.png)
 
 É inválido porque a chave `60` é maior que a chave `50`, mas está alocada na subárvore à esquerda, o que quebra o algoritmo de busca (`get`), que vai buscar `60` à direita e não o encontrará.
 
@@ -143,6 +144,17 @@ Inserção no padrão BST: faremos uma navegação pela árvore usando o Compara
 Rebalanceamento: nesse processo de inserir um novo nó vermelho, podemos violar as regras da Árvore Preto-Vermelha (como ter dois nós vermelhos em sequência). É nesse caso que entra o algoritmo de ajuste:
 
 Ele analisa a cor do "tio" do nó inserido para executar as rotações ou trocas de cores necessárias para restaurar o balanceamento da árvore. Tudo isso já foi explicado no material de [Árvore Preto-vermelha](link).
+
+### Remoção no TreeMap (remove)
+
+Assim como na inserção, a remoção de um par (Chave, Valor) também é dividida em duas etapas:
+
+A remoção também segue o padrão BST, localizamos o nó correspondente à chave, se o nó tiver nenhum ou apenas um filho, ele é simplesmente removido. Se tiver dois filhos, encontramos o seu sucessor (o menor nó da subárvore à direita), copiamos a chave/valor do sucessor para o nó atual e removemos o nó sucessor original (caindo no caso de 0 ou 1 filho).
+
+Se o nó removido for Vermelho, nenhuma propriedade da Árvore Preto-Vermelha é violada (a altura preta se mantém igual e não criamos conflitos de nós vermelhos consecutivos).
+Se o nó removido for Preto, a altura preta de uma das subárvores diminui, criando um problema que precisa ser resolvido. Aqui o algoritmo de rotações e alteração de cores entra em ação, de forma a reestabelecer as propriedades da árvore em $O(\log n)$. Lembrando, tudo isso já foi explicado no material de Árvore Preto-Vermelha.
+
+
 
 ### Fatiamento do mapa (subMap)
 
